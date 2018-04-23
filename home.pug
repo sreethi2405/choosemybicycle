@@ -1,0 +1,194 @@
+html 
+    head
+        title ChooseMyBicycle
+        meta(charset="utf-8")
+        meta(name="viewport",content="width=device-width,initial-scale=1")
+        link(rel="stylesheet",href="css/bootstrap.min.css")
+        link(rel="stylesheet", href="css/style.css")
+        link(rel="stylesheet", href="css/fontawesome.min.css")
+        link(rel="icon",type="image/x-icon",href="img/favicon.ico")
+        script(src="js/popper.min.js")
+        script(src="js/jquery.min.js")
+        script(src="js/fontawesome-all.js")
+
+
+    body
+        div(class="header-wrapper wd_100")  
+                div.container-fluid
+                    div(class="row")
+                        div.col-sm-1
+                            img(src="img/logocmb.png",alt="image")
+                        div(class="col-sm-11 pt-5")
+                            div.top_segment
+                                div(class="form-group")
+                                    div.input-group
+                                            input(type="text",class="form-control  border border-0",id="id_cmb_search",onkeyup="searchitems()")
+                                            span(class="input-group-addon bg-white p-1")
+                                                    i(class="fas fa-search fa-2x p-1") 
+                                                               
+                                            a(id="launchCmbLoginModal pl-3",href="#",class="user_icons right_adjust ml-3",data-toggle="modal",data-target="#cmbLoginModal")
+                                                i(class="fas fa-user fa-2x p-1",style="color:white")
+                                            
+                                            a(id="user_icons")
+                                                div.user_icons_cart
+                                                    i(class="fas fa-shopping-cart fa-2x p-1",style="color:white")
+                                                    div(class="user_icons_badge",current_items="0") 0
+                                    div(class="acp-results hide",id="acp-result")
+                                        div(class="acp_container product-acp hide",id="acp_contain")              
+                    nav(class="navbar navbar-expand-md  navbar-dark mx-auto" style="width:500px")
+                        button(class="navbar-toggler",type="button",data-toggle="collapse",data-target="#collapsibleNavbar")
+                            span(class="fas fa-th-list")
+                        div(class="collapse navbar-collapse" id="collapsibleNavbar")
+                            ul(class="navbar-nav")
+                                li(class="nav-item dropdown" id="nav")
+                                    a(class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown") Bicycles
+                                    div(class="dropdown-menu")
+                                        a(class="dropdown-item",href="#") Link1
+                                        a(class="dropdown-item",href="#") Link2
+                                        a(class="dropdown-item",href="#") Link3
+
+                                li(class="nav-item dropdown" id="nav")
+                                    a(class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown") Accessories
+                                    div(class="dropdown-menu")
+                                        a(class="dropdown-item",href="#") Link1
+                                        a(class="dropdown-item",href="#") Link2
+                                        a(class="dropdown-item",href="#") Link3
+                                li(class="nav-item dropdown" id="nav")
+                                    a(class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown") Apparel
+                                    div(class="dropdown-menu")
+                                        a(class="dropdown-item",href="#") Link1
+                                        a(class="dropdown-item",href="#") Link2
+                                        a(class="dropdown-item",href="#") Link3
+        div(class="modal fade" id="cmbLoginModal")
+            div(class="modal-dialog modal-md modal-dialog-centered")
+                div(class="modal-content")
+                    div(class="modal-header")
+                        h4(class="modal-title") 
+                        button(type="button",class="close",data-dismiss="modal") &times;
+                    div(class="modal-body border border-top-0 border-left-0 border-right-0") 
+                        b(style="text-align:center;padding-left: 50px;") GET STARTED WITH OUR SECURE SIGN UP
+                    form(action="/login",method="post" name="myForm" onsubmit="return validateForm()")
+                        div(class="form-group p-4")
+                            div(class="input-group p-1")
+                                input(type="email" class="form-control cmbInput" id="email" name="email" placeholder="Email Address*" onblur="checkemail()")
+                                div(class="errorMessage hide" id="changeemailerror")
+                                   span Please enter a valid Email Address
+                            div(class="input-group p-1")    
+                                i(class="fas fa-eye img-responsive viewPasswordIcon",id="passicon",style="color:#6eaff5",onclick="toggle()")
+                            div(class="input-group p-1")    
+                                input(type="password" class="form-control cmbInput" id="pwd" name="pwd" placeholder="Password*" data-toggle="password" )
+                                div(class="errorMessage hide" id="changepasserror")
+                                   span Please enter a valid Password [Min. 8 Characters]
+                            div(class="input-group p-1")
+                                i(class="fas fa-eye img-responsive viewPasswordIcon",id="passicon1",style="color:#6eaff5" onclick="toggle1()")
+                            div(class="input-group p-1")    
+                                input(type="password" class="form-control cmbInput" id="repwd" placeholder="Confirm password*")
+                                div(class="errorMessage hide" id="changerepasserror")
+                                   span Password Doesn't match
+                            div(class="input-group p-1")   
+                                div(class="alert alert-danger form-control hide",id="alertmsg")
+                                    strong User Already Exist!!!        
+                            div(class="input-group p-1 pt-2")
+                                input(type="submit" class="form-control" id="submit" style="background-color:#ef3e36;color:white;font-weight:bold" value="CREATE ACCOUNT")
+                            div(class="input-group p-1 pt-2")
+                                p Already Have An Account? Click Here To
+                                a(href="#" data-dismiss="modal" data-toggle="modal",data-target="#cmbregisterModal" style="text-decoration:none;padding-left:5px;color:blue;") LOGIN 
+                    div(class="modal-footer")
+                        div.row
+                            div(class="col-xs-4 col-sm-2")
+                                img(src="img/bp1.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Fully-Fitted and Ready to Ride Bicycles")
+                            div(class="col-xs-4 col-sm-2")
+                                img(src="img/bp2.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Full Manufacturers Warranty")
+                            div(class="col-xs-4 col-sm-2")
+                                img(src="img/bp3.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Free Returns in case of Defects")
+                            div(class="col-xs-4 col-sm-2")
+                                img(src="img/bp4.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="100% Original Products")
+                            div(class="col-xs-4 col-sm-2")
+                                img(src="img/bp5.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Customized, Safe and Secure Packaging")
+                            div(class="col-xs-4 col-sm-2")
+                                img(src="img/bp6.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Assisted Buying")
+        div(class="modal fade" id="cmbregisterModal")
+                    div(class="modal-dialog modal-md modal-dialog-centered")
+                        div(class="modal-content")
+                            div(class="modal-header")
+                                h4(class="modal-title") 
+                                button(type="button",class="close",data-dismiss="modal") &times;
+                            div(class="modal-body border border-top-0 border-left-0 border-right-0") 
+                                b(style="text-align:center;padding-left: 50px;") GET STARTED WITH OUR SECURE SIGN UP
+                            form(method="post")
+                                div(class="form-group p-4")
+                                    div(class="input-group p-1")
+                                        input(type="email" class="form-control cmbInput" id="emailid" name="email" placeholder="Email Address*" required)
+                                        div(class="errorMessage hide")
+                                            span Please enter a valid Email Address
+                                    div(class="input-group p-1")    
+                                        i(class="fas fa-eye img-responsive viewPasswordIcon",id="passicon1",style="color:#6eaff5",onclick="toggle()")
+                                    div(class="input-group p-1")    
+                                        input(type="password" class="form-control cmbInput" id="pwd1" name="pwd" placeholder="Password*" data-toggle="password" required)
+                                        div(class="errorMessage hide")
+                                            span Please enter a valid Password [Min. 8 Characters]
+                                    div(class="input-group p-1 pt-2")
+                                        input(type="submit" class="form-control" id="login" style="background-color:#ef3e36;color:white;font-weight:bold" value="LOGIN")
+                                    div(class="input-group p-1 pt-2")
+                                        p Don't Have An Account? Click Here To 
+                                        a(href="#" data-dismiss="modal" data-toggle="modal",data-target="#cmbLoginModal" style="text-decoration:none;padding-left:5px;color:blue;") SIGN UP 
+                            div(class="modal-footer")
+                                div.row
+                                    div(class="col-xs-4 col-sm-2")
+                                        img(src="img/bp1.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Fully-Fitted and Ready to Ride Bicycles")
+                                    div(class="col-xs-4 col-sm-2")
+                                        img(src="img/bp2.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Full Manufacturers Warranty")
+                                    div(class="col-xs-4 col-sm-2")
+                                        img(src="img/bp3.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Free Returns in case of Defects")
+                                    div(class="col-xs-4 col-sm-2")
+                                        img(src="img/bp4.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="100% Original Products")
+                                    div(class="col-xs-4 col-sm-2")
+                                        img(src="img/bp5.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Customized, Safe and Secure Packaging")
+                                    div(class="col-xs-4 col-sm-2")
+                                        img(src="img/bp6.jpg" alt="Brand Promise" class="img-responsive center-block img-fluid" title="Assisted Buying")
+                
+        div.content-wrapper 
+            div(class="carousel_parent_container" )      
+                div(class="carousel slide",id="demo",data-ride="carousel")
+                    ul(class="carousel-indicators ")
+                        li(data-target="#demo",data-slide-to="0",class="active")
+                        li(data-target="#demo",data-slide-to="1")
+                        li(data-target="#demo",data-slide-to="2")
+                    div(class="carousel-inner")
+                        div(class="carousel-item active")    
+                            img( class="img-responsive img-fluid" src="img/trek-super-sale-large-bg.jpg",alt="image goes here",width="1100",height="400")
+                        div(class="carousel-item")    
+                            img(class="img-responsive img-fluid" src="img/kona-carousel.jpg",alt="image goes here",width="1100",height="400")
+                        div(class="carousel-item")    
+                            img(class="img-responsive img-fluid" src="img/merida-offers.jpg",alt="image goes here",width="1100",height="400")
+                    a(class="carousel-control-prev",href="#demo",data-slide="prev")
+                        span.carousel-control-prev-icon
+                    a(class="carousel-control-next",href="#demo",data-slide="next")
+                        span.carousel-control-next-icon
+            div(class="top_information_banner col-lg-12 col-md-12 col-sm-12 col-xs-12")
+                div.container
+                    div.top_information_head
+                        h4  Buy Bicycles online with the ChooseMyBicycle.com Brand Promise 
+                    div(class="row pt4")
+                        div.segment.bp.col-md-2.col-xs-6.col-sm-6
+                            img.img-responsive.center-block(src="img/bp1.jpg")
+                            p Fully-Fitted and Ready to Ride Bicycles
+                        div.segment.bp.col-md-2.col-xs-6.col-sm-6
+                            img.img-responsive.center-block(src="img/bp2.jpg")
+                            p Full Manufacturers Warranty
+                        div.segment.bp.col-md-2.col-xs-6.col-sm-6
+                            img.img-responsive.center-block(src="img/bp3.jpg")
+                            p Free returns incase of Defects
+                        div.segment.bp.col-md-2.col-xs-6.col-sm-6
+                            img.img-responsive.center-block(src="img/bp4.jpg")
+                            p 100% Original Products
+                        div.segment.bp.col-md-2.col-xs-6.col-sm-6
+                            img.img-responsive.center-block(src="img/bp5.jpg")
+                            p Customised, Safe and  Secure Packaging
+                        div.segment.bp.col-md-2.col-xs-6.col-sm-6
+                            img.img-responsive.center-block(src="img/bp6.jpg")
+                            p Assisted Buying
+        script(src="js/bootstrap.min.js")
+        script(src="js/home.js")
+
+
